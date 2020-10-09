@@ -2,6 +2,10 @@
 <html lang="en">
 
 <head>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-firestore.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
@@ -21,9 +25,31 @@
             Read:<input id="check" class="box" type="checkbox">
         </form>
         <input class="sub" type="button" value="Add Book">
-        <input type="text" id="filter" placeholder="Search Items...">
+        <input type="text" class="box" id="filter" placeholder="Search Items...">
     </div>
 
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyB9NtRbKZhxNAfPzQCjMnkDIhl7UGW4dmU",
+            authDomain: "akward-library.firebaseapp.com",
+            databaseURL: "https://akward-library.firebaseio.com",
+            projectId: "akward-library",
+            storageBucket: "akward-library.appspot.com",
+            messagingSenderId: "57169338133",
+            appId: "1:57169338133:web:8b6a95131e0f31ee47931c",
+            measurementId: "G-N20Y6MN4QS"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore()
+        firebase.analytics();
+    </script>
 
     <script src="script.js"></script>
 </body>

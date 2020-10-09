@@ -23,9 +23,11 @@ Book.prototype = {
   },
   displayBook() {
     console.log(
-      `${this.title} by ${this.author}, ${this.pages} pages. Read: ${this.read}`
+      `${this.title} by ${this.author} ( ${this.pages} pages ) .  Read: ${this.read} `
     );
-    return `${this.title} by ${this.author}, ${this.pages} pages.`;
+    return `"${this.title.italics()}"  by  ${this.author.bold()} ( ${
+      this.pages
+    } pages ) .`;
   },
 };
 
@@ -51,15 +53,32 @@ sub.addEventListener("click", () => {
     y.classList.add("delete");
     y.innerHTML = "x";
     if (checkit.checked == true) {
-      div.innerHTML += `${newBook.displayBook()} Read: `;
+      div.innerHTML += `${newBook.displayBook()}  Read: `;
       x.setAttribute("checked", true);
       div.append(x);
       div.append(y);
     } else {
-      div.innerHTML += `${newBook.displayBook()} Read: `;
+      div.innerHTML += `${newBook.displayBook()}  Read: `;
       div.append(x);
       div.append(y);
     }
+    /////----------------------------------------------firebase below
+    db.collection("books")
+      .add({
+        title: newBook.title,
+        author: newBook.author,
+        pages: newBook.pages,
+        read: newBook.read,
+      })
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
+        div.setAttribute("data-id", docRef.id);
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
+
+    /////----------------------------------------------firebase above
     console.log("There are currently: " + myLibrary.length + " books: ");
     console.log(myLibrary);
     author.value = "";
@@ -70,22 +89,36 @@ sub.addEventListener("click", () => {
 });
 
 container.addEventListener("click", (k) => {
+  k.stopPropagation();
   const par = k.target.parentElement;
+  let code = k.target.parentElement.getAttribute("data-id");
+
   if (k.target.classList == "delete") {
+    db.collection("books").doc(code).delete();
     container.removeChild(par);
-    console.log("Deleting " + par.id);
     myLibrary = myLibrary.filter((k) => k.title !== par.id);
+    console.log("Deleting " + par.id);
+    console.log("data-id " + code);
     console.log(myLibrary);
-  }
-  if (k.target.classList == "toggle") {
-    console.log("clicking it");
+  } else if (k.target.classList == "toggle") {
     myLibrary
       .filter((k) => k.title == par.id)
-      .map((x) => (x.read == true ? (x.read = false) : (x.read = true)));
+      .map((k) => {
+        if (k.read == true) {
+          console.log("data-id " + code);
+          db.collection("books").doc(code).update({ read: false });
+          k.read = false;
+        } else {
+          console.log("data-id " + code);
+          db.collection("books").doc(code).update({ read: true });
+          k.read = true;
+        }
+      });
 
     console.log(myLibrary);
   }
 });
+
 const search = document.getElementById("filter");
 const itemList = document.getElementById("items");
 
@@ -106,4 +139,5 @@ const filterItems = (e) => {
     }
   });
 };
+
 search.addEventListener("keyup", filterItems);
