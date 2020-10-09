@@ -50,6 +50,7 @@ input[type="radio"] {
 }
 
 .sub {
+  background-color: lightgray;
   color: rgb(170, 129, 136);
   border: 1px solid gray;
   border-radius: 4px;
