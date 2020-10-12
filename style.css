@@ -33,6 +33,7 @@ input[type="radio"] {
 
 .card {
   margin: auto;
+  margin-bottom: 5px;
   padding: 6px;
   border-radius: 8px;
   text-align: center;
