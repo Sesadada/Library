@@ -33,13 +33,12 @@ input[type="radio"] {
 
 .card {
   margin: auto;
-  padding-top: 6px;
-  margin-bottom: 4px;
+  padding: 6px;
   border-radius: 8px;
   text-align: center;
-  color: rgb(233, 130, 147);
+  color: rgb(226, 84, 108);
   width: 50vw;
-  height: 6vh;
+
   background-color: rgb(248, 230, 235);
 }
 .delete {
@@ -47,6 +46,7 @@ input[type="radio"] {
   color: rgb(170, 129, 136);
   border: 1px solid gray;
   border-radius: 4px;
+  background-color: rgb(226, 223, 223);
 }
 
 .sub {
