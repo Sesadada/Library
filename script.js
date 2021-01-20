@@ -141,14 +141,23 @@
         rendering(b)
       })
   }
-  
+
   if(stored != null){
   renderPage(stored, myLibrary)
   }
   
-  sub.addEventListener("click", () => {
-      createNewBook()
-  });
+  sub.addEventListener("click", 
+      createNewBook
+  );
+
+ window.addEventListener("keyup", function(e){
+    if (e.keyCode === 13) {
+    // Cancel the default action, if needed
+    e.preventDefault();
+    // Trigger the button element with a click
+   createNewBook()
+    }
+  })
   
   container.addEventListener("click", deleting)
   container.addEventListener("click", toggling)
