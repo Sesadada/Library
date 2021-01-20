@@ -150,14 +150,16 @@
       createNewBook
   );
 
- window.addEventListener("keyup", function(e){
-    if (e.keyCode === 13) {
+ window.addEventListener("keydown", function(e){
+  
+  let key = e.key || String.fromCharCode(e.keyCode);
+    if (key === "Enter") {
     // Cancel the default action, if needed
     e.preventDefault();
     // Trigger the button element with a click
    createNewBook()
     }
-  })
+  }, false)
   
   container.addEventListener("click", deleting)
   container.addEventListener("click", toggling)
