@@ -140,9 +140,11 @@
         original.push(b)
         rendering(b)
       })
-     
   }
+  
+  if(stored != null){
   renderPage(stored, myLibrary)
+  }
   
   sub.addEventListener("click", () => {
       createNewBook()
