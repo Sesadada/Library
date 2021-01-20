@@ -136,7 +136,6 @@
   
 
   const renderPage = (arrLocalS, original) =>{
-   
       arrLocalS.forEach(b => {
         original.push(b)
         rendering(b)
